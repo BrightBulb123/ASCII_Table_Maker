@@ -40,7 +40,21 @@ def table_printer(data):
     table = ''
     for x in range(rows):
         table += dividorLine + '\n'
-        table += '| ' + ' | '.join(str(data[x][y]) for y in range(columns)) + ' |' + '\n'
+        separatorLine = '| ' + ' | '.join(str(data[x][y]) for y in range(columns)) + ' |' + '\n'
+        if len(separatorLine) != len(dividorLine):
+            separatorLine = separatorLine.split('|')
+            separatorLine.remove('')
+            separatorLine.remove('\n')
+            for segment in separatorLine:
+                temp = str(segment)
+                while len(segment) != (int(maxWidths[separatorLine.index(temp)])+2):
+                    segment += ' '
+                    segment = ' ' + segment
+                separatorLine[separatorLine.index(temp)] = segment
+            temp = '|'
+            temp += '|'.join(separatorLine) + '|' + '\n'
+            separatorLine = str(temp)
+            table += separatorLine
     table += dividorLine
 
     return Table(rows, columns, data, table)
@@ -48,5 +62,5 @@ def table_printer(data):
 
 print(table_printer(
                     [['column 1', 'column 2'],
-                    [1, 2],
-                    ['row 1', 'row 2']]).data_table)
+                    [12, 23],
+                    ['row1', 'row2']]).data_table)
