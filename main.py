@@ -91,6 +91,8 @@ print(table_printer(
     ]
 ).data_table)
 
+print("\n\n")
+
 print(table_printer(
     [
         ["C1R1", "C1R2-Uneven"],
