@@ -1,7 +1,7 @@
 """Generate a nice and neat table out of text"""
 
 class Table():
-    def __init__(self, rows, columns, data, data_table) -> None or str:
+    def __init__(self, rows, columns, data, data_table) -> None:
         self.rows = rows
         self.columns = columns
         self.data = data
@@ -12,15 +12,7 @@ def table_printer(data):
     if type(data) != list:
         return "Please enter a valid list for the data."
 
-    rows = len(data)
-
-    # figuring out how many columns there are
-    all_entries = []
-    for row in data:
-        for item in row:
-            all_entries.append(item)
-
-    columns = int(round(len(all_entries)/rows))
+    rows, all_entries, columns = rowsColumnsAll_entries(data)
 
     # Finding the max width of each column
     maxWidths = []
@@ -62,6 +54,18 @@ def table_printer(data):
 
     return Table(rows, columns, data, table)
 
+def rowsColumnsAll_entries(data):
+    rows = len(data)
+
+    # figuring out how many columns there are
+    all_entries = []
+    for row in data:
+        for item in row:
+            all_entries.append(item)
+
+    columns = int(round(len(all_entries)/rows))
+    return rows,all_entries,columns
+
 def segmentShortener(segment, lengthWanted):
     if len(segment) > lengthWanted:
         lOrR = justificationAsker(segment)
@@ -98,4 +102,12 @@ print(table_printer(
         ["C1R1", "C1R2-Uneven"],
         ["C2R1-Uneven", "C2R2"]
     ]
+).data_table)
+
+print(table_printer(
+        [
+          ["C1R1", "C2R1", "C3R1"],
+          ["C1R2", "C2R2", "C3R2"],
+          ["C1R3", "C2R3", "C3R3"],
+      ]
 ).data_table)
