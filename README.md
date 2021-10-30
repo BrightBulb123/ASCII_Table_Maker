@@ -1,6 +1,6 @@
 # ASCII Table Maker
 
-## Instrcutions:
+## Instructions:
 
 ***
 
