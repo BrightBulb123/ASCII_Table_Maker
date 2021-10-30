@@ -1,32 +1,24 @@
 """Generate a nice and neat table out of text"""
 
-class Table():
-    def __init__(self, rows, columns, data, data_table) -> None:
+class TableClass():
+    def __init__(self, rows: int, columns: int, data: list, data_table: str) -> None:
         self.rows = rows
         self.columns = columns
         self.data = data
         self.data_table = data_table
 
 
-def table_printer(data):
+def table_printer(data: list) -> TableClass:
     if type(data) != list:
-        return "Please enter a valid list for the data."
+        return TableClass(None, None, data, "Please enter a valid list for the data.")
 
     rows, all_entries, columns = rowsColumnsAll_entries(data)
 
     # Finding the max width of each column
-    maxWidths = []
-    for x in range(columns):
-        temp = [str(y) for y in all_entries[x::columns]]
-        maxWidths.append(len(max(temp, key=len)))
+    maxWidths = findMaxWidth(all_entries, columns)
 
     # Generating the horizontal lines for the table
-    dividorLine = '+'
-
-    for lineWidth in maxWidths:
-        for _ in range(lineWidth+2):
-            dividorLine += '-'
-        dividorLine += '+'
+    dividorLine = dividorLineMaker(maxWidths)
 
     # Generating the actual table
     table = ''
@@ -52,7 +44,23 @@ def table_printer(data):
             table += separatorLine
     table += dividorLine
 
-    return Table(rows, columns, data, table)
+    return TableClass(rows, columns, data, table)
+
+def dividorLineMaker(maxWidths):
+    dividorLine = '+'
+
+    for lineWidth in maxWidths:
+        for _ in range(lineWidth+2):
+            dividorLine += '-'
+        dividorLine += '+'
+    return dividorLine
+
+def findMaxWidth(all_entries, columns):
+    maxWidths = []
+    for x in range(columns):
+        temp = [str(y) for y in all_entries[x::columns]]
+        maxWidths.append(len(max(temp, key=len)))
+    return maxWidths
 
 def rowsColumnsAll_entries(data):
     rows = len(data)
@@ -111,3 +119,13 @@ print(table_printer(
           ["C1R3", "C2R3", "C3R3"],
       ]
 ).data_table)
+
+print(table_printer(
+        [
+          ["C1R1", "C2R1", "C3R1"],
+          ["C1R2", "C2R2", "C3R2"],
+          ["C1R3", "C2R3", ""],
+      ]
+).data_table)
+
+print(table_printer('something').data_table)
