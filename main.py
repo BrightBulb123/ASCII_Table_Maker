@@ -89,28 +89,14 @@ def justificationAsker(segment):
     return lOrR
 
 
-print(table_printer([
-                        ['**C1R1**', 'C1R2', 'C1R3'],
-                        ['C2R1', 'C2R2', '*C2R3*'],
-                        ['*C3R1*', 'C3R2', 'C3R3']
-                    ]).data_table)
-
-print("\n\n")
-
-print(table_printer(
-    [
-        ["C1R1"]
-    ]
-).data_table)
-
-print("\n\n")
-
 print(table_printer(
     [
         ["C1R1", "C1R2-Uneven"],
         ["C2R1-Uneven", "C2R2"]
     ]
 ).data_table)
+
+print("\n\n")
 
 print(table_printer(
         [
@@ -119,13 +105,3 @@ print(table_printer(
           ["C1R3", "C2R3", "C3R3"],
       ]
 ).data_table)
-
-print(table_printer(
-        [
-          ["C1R1", "C2R1", "C3R1"],
-          ["C1R2", "C2R2", "C3R2"],
-          ["C1R3", "C2R3", ""],
-      ]
-).data_table)
-
-print(table_printer('something').data_table)
