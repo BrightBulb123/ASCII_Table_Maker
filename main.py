@@ -118,3 +118,9 @@ def excel_copy_to_list(data: str) -> list[str]:
         final.append(temp)
 
     return final[:-1] if final[-1] == [""] else final
+
+
+if __name__ == "__main__":
+    data = input("Enter excel data:\n")
+    print("\n\n")
+    print(table_printer(excel_copy_to_list(data), "l"))
